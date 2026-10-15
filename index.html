@@ -1,0 +1,1021 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lernseite Mikroorganismen und Biotechnologie</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+:root{
+  /* Layout: ein Lesestrang mit klebender Navigation. Farben aus dem Labor: Agar-Grün, Gram-Violett (Bakterien), Hefe-Bernstein (Pilze). */
+  --bg:#F1F5F3; --surface:#FFFFFF; --surface-2:#E7EEEA; --ink:#10201B; --muted:#47594F; --line:#CBD7D1;
+  --accent:#17795A; --accent-ink:#FFFFFF; --accent-soft:#D6EEE5;
+  --bakt:#5A3C96; --bakt-soft:#ECE5F8; --pilz:#8A5700; --pilz-soft:#FAEBC8;
+  --ok:#1B6E37; --ok-soft:#D9F0E0; --bad:#A8231B; --bad-soft:#FBE0DD; --focus:#0B5CD6;
+  --f-display:'Bricolage Grotesque',system-ui,'Segoe UI',sans-serif;
+  --f-body:'Source Sans 3',system-ui,'Segoe UI',sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1714; --surface:#16231F; --surface-2:#1F302A; --ink:#E5EFEA; --muted:#9FB3AA; --line:#2B3F38;
+    --accent:#4CC59A; --accent-ink:#06241A; --accent-soft:#16372D;
+    --bakt:#BCA6F2; --bakt-soft:#2A2145; --pilz:#F0B84A; --pilz-soft:#3A2C0E;
+    --ok:#74D493; --ok-soft:#173523; --bad:#FF9188; --bad-soft:#42201C; --focus:#7FB0FF;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1714; --surface:#16231F; --surface-2:#1F302A; --ink:#E5EFEA; --muted:#9FB3AA; --line:#2B3F38;
+  --accent:#4CC59A; --accent-ink:#06241A; --accent-soft:#16372D;
+  --bakt:#BCA6F2; --bakt-soft:#2A2145; --pilz:#F0B84A; --pilz-soft:#3A2C0E;
+  --ok:#74D493; --ok-soft:#173523; --bad:#FF9188; --bad-soft:#42201C; --focus:#7FB0FF;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);line-height:1.12;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3.1rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(1.55rem,4vw,2.1rem);font-weight:800;letter-spacing:-.005em}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0 0 .8em}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+.wrap{max-width:54rem;margin:0 auto}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
+  margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top .wrap{display:flex;align-items:center;gap:.75rem;padding-block:.55rem}
+.brand{font-family:var(--f-display);font-weight:800;white-space:nowrap}
+.nav{display:flex;gap:.35rem;overflow-x:auto;flex:1;min-width:0;scrollbar-width:thin;padding-block:2px}
+.nav a{white-space:nowrap;text-decoration:none;color:var(--ink);padding:.3rem .7rem;border-radius:99px;border:1px solid transparent;font-weight:600;font-size:.95rem}
+.nav a:hover{background:var(--surface-2)}
+.nav a.on{background:var(--accent);color:var(--accent-ink)}
+.btn{font:inherit;font-weight:700;cursor:pointer;border-radius:10px;border:2px solid var(--line);background:var(--surface);color:var(--ink);padding:.5rem .95rem;min-height:44px}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.small{min-height:36px;padding:.3rem .7rem;font-size:.95rem}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.hero{padding-block:2.2rem 1rem}
+.hero p.lead{font-size:1.2rem;max-width:40rem;color:var(--muted);margin-top:.8rem}
+.path{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));gap:.75rem;margin-top:1.4rem;padding:0;list-style:none}
+.path li{min-width:0}
+.path a{display:block;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:.9rem 1rem;height:100%}
+.path a:hover{border-color:var(--accent)}
+.path b{display:block;font-family:var(--f-display);font-size:1.15rem}
+.path span{color:var(--muted);font-size:.95rem}
+section.block{padding-block:2.6rem .5rem;scroll-margin-top:70px}
+section.block>header{margin-bottom:1.1rem}
+section.block>header p{color:var(--muted);margin:.5rem 0 0;max-width:42rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:1.1rem 1.2rem;margin-block:1rem}
+.card>h3{margin-bottom:.5rem}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:1rem}
+.grid2>.card{margin:0}
+.merke{background:var(--accent-soft);border-radius:var(--r);padding:1rem 1.2rem;margin-block:1.2rem}
+.merke h3{font-size:.85rem;text-transform:uppercase;letter-spacing:.09em;color:var(--accent);margin-bottom:.5rem}
+.merke ul{margin:0;padding-left:1.2rem}
+.merke li{margin-bottom:.3rem}
+.tag{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.02em;padding:.1rem .55rem;border-radius:99px;vertical-align:middle}
+.tag.b{background:var(--bakt-soft);color:var(--bakt)}
+.tag.p{background:var(--pilz-soft);color:var(--pilz)}
+.tag.n{background:var(--surface-2);color:var(--muted)}
+.formula{font-family:var(--f-mono);font-size:1rem;background:var(--surface-2);border-radius:10px;padding:.6rem .8rem;margin:.4rem 0 .6rem;overflow-x:auto}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:30rem}
+th,td{padding:.6rem .8rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--f-display);font-size:.95rem;background:var(--surface-2)}
+th.b{background:var(--bakt-soft);color:var(--bakt)}
+th.p{background:var(--pilz-soft);color:var(--pilz)}
+td.yes{font-weight:700}
+.seg{display:inline-flex;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.seg button{font:inherit;font-weight:700;border:0;background:transparent;color:var(--ink);padding:.55rem 1rem;cursor:pointer;min-height:44px}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.orgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));gap:.7rem;margin-top:1rem}
+.org{background:var(--surface-2);border-radius:12px;padding:.8rem .9rem}
+.org b{display:block;margin-bottom:.2rem}
+.org .res{font-weight:700}
+.org.no .res{color:var(--bad)}
+.org small{display:block;color:var(--muted);margin-top:.2rem}
+details.prod{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-block:.8rem}
+details.prod>summary{cursor:pointer;padding:.9rem 1.1rem;font-family:var(--f-display);font-weight:700;font-size:1.15rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;list-style-position:inside}
+details.prod .body{padding:0 1.1rem 1rem}
+dl.facts{display:grid;grid-template-columns:minmax(7rem,9rem) 1fr;gap:.35rem .9rem;margin:0 0 .8rem}
+dl.facts dt{font-weight:700;color:var(--muted)}
+dl.facts dd{margin:0}
+@media (max-width:34rem){dl.facts{grid-template-columns:1fr}dl.facts dt{margin-top:.4rem}}
+.body ol,.body ul{margin:.2rem 0 .6rem;padding-left:1.3rem}
+.body li{margin-bottom:.25rem}
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:.8rem;margin-block:1rem}
+.fig svg{display:block;width:100%;height:auto}
+.fig figcaption{color:var(--muted);font-size:.95rem;margin-top:.4rem}
+.cell{fill:var(--bakt-soft);stroke:var(--bakt);stroke-width:2.5}
+.ring{fill:none;stroke:var(--bakt);stroke-width:2.5}
+.st{font-family:var(--f-body);font-size:15px;font-weight:700;fill:var(--muted);text-anchor:middle}
+.axis{stroke:var(--muted);stroke-width:1.5;fill:none}
+.curve{stroke:var(--bakt);stroke-width:4;fill:none;stroke-linecap:round}
+.band1,.band3{fill:var(--surface-2)}
+.band2,.band4{fill:var(--bakt-soft)}
+.slider{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+.slider input[type=range]{flex:1 1 14rem;min-width:0;accent-color:var(--accent);height:32px}
+.big{font-family:var(--f-display);font-weight:800;font-size:2rem;color:var(--bakt)}
+.trainer{margin-block:1.6rem}
+.trainer>h3{font-size:1.35rem;margin-bottom:.2rem}
+.trainer>p.how{color:var(--muted);margin-bottom:.8rem}
+.bank,.slots{display:flex;flex-wrap:wrap;gap:.5rem;margin-block:.6rem}
+.chip{font:inherit;font-weight:700;cursor:pointer;background:var(--surface);border:2px solid var(--line);color:var(--ink);padding:.4rem .8rem;border-radius:99px;min-height:44px}
+.chip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.eq{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-block:.6rem}
+.eq .arrow{font-family:var(--f-mono);font-size:1.4rem;font-weight:700}
+.slot{font:inherit;min-width:8.5rem;min-height:46px;border:2px dashed var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font-weight:700;padding:.3rem .7rem;cursor:pointer}
+.slot.fill{border-style:solid;border-color:var(--accent);background:var(--surface)}
+.slot.ok{border-color:var(--ok);background:var(--ok-soft);color:var(--ok)}
+.slot.bad{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}
+.extras{display:flex;flex-wrap:wrap;gap:.8rem;margin-block:.8rem}
+.extras label{display:flex;flex-direction:column;font-weight:700;font-size:.9rem;color:var(--muted);gap:.2rem}
+select{font:inherit;padding:.45rem .6rem;border-radius:10px;border:2px solid var(--line);background:var(--surface);color:var(--ink);min-height:44px;max-width:100%}
+select.ok{border-color:var(--ok);background:var(--ok-soft)}
+select.bad{border-color:var(--bad);background:var(--bad-soft)}
+.row-actions{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.8rem}
+.msg{font-weight:700}
+.msg.ok{color:var(--ok)}
+.msg.bad{color:var(--bad)}
+.qcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:1rem 1.1rem;margin-block:.8rem}
+.qtext{font-weight:700;margin-bottom:.7rem}
+.opts{display:grid;gap:.5rem}
+.opt{font:inherit;text-align:left;cursor:pointer;background:var(--bg);border:2px solid var(--line);color:var(--ink);border-radius:12px;padding:.6rem .9rem;min-height:44px}
+.opt:hover:not([disabled]){border-color:var(--accent)}
+.opt.ok{background:var(--ok-soft);border-color:var(--ok)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt.dim{opacity:.6}
+.opt[disabled]{cursor:default}
+.fb{margin-top:.7rem;padding:.6rem .8rem;border-radius:10px;background:var(--surface-2)}
+.tfgrid .opts{grid-template-columns:1fr 1fr}
+.tally{font-weight:700;color:var(--muted)}
+ol.order{list-style:none;padding:0;margin:.6rem 0;display:grid;gap:.5rem;counter-reset:o}
+ol.order li{display:flex;align-items:center;gap:.6rem;background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:.5rem .7rem}
+ol.order li .t{flex:1;min-width:0}
+ol.order li.ok{border-color:var(--ok);background:var(--ok-soft)}
+ol.order li.bad{border-color:var(--bad);background:var(--bad-soft)}
+ol.order .mv{display:flex;gap:.3rem}
+.sortrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem;align-items:center;border-bottom:1px solid var(--line);padding-block:.6rem}
+.sortrow:last-child{border-bottom:0}
+.sortrow .cats{display:flex;flex-wrap:wrap;gap:.4rem}
+.sortrow .cats .btn{min-height:40px;padding:.3rem .65rem;font-size:.92rem}
+.sortrow.done .t{color:var(--ok);font-weight:700}
+.sortrow .hint{grid-column:1/-1;color:var(--bad);font-weight:600;font-size:.95rem}
+@media (max-width:40rem){.sortrow{grid-template-columns:1fr}}
+textarea{width:100%;min-height:8rem;font:inherit;padding:.7rem;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);resize:vertical}
+.sol{margin-top:.8rem;background:var(--surface-2);border-radius:12px;padding:.8rem 1rem}
+.sol label{display:flex;gap:.6rem;align-items:flex-start;margin-block:.4rem}
+.sol input[type=checkbox]{width:22px;height:22px;margin-top:.15rem;accent-color:var(--accent);flex:none}
+.bar{height:12px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .3s}
+.secres{display:grid;gap:.6rem;margin-block:1rem}
+.secres div.r{display:grid;grid-template-columns:minmax(8rem,14rem) 1fr auto;gap:.7rem;align-items:center}
+@media (max-width:34rem){.secres div.r{grid-template-columns:1fr auto}.secres div.r .bar{grid-column:1/-1;order:3}}
+.wrong{margin:.4rem 0;padding:.7rem .9rem;border-radius:12px;background:var(--bad-soft)}
+.wrong b{color:var(--bad)}
+.checks{list-style:none;padding:0;margin:0;display:grid;gap:.4rem}
+.checks label{display:flex;gap:.6rem;align-items:flex-start;cursor:pointer}
+.checks input{width:22px;height:22px;margin-top:.15rem;accent-color:var(--accent);flex:none}
+dl.gloss{margin:0;display:grid;gap:.1rem}
+dl.gloss dt{font-weight:700;margin-top:.7rem;font-family:var(--f-display)}
+dl.gloss dd{margin:0;color:var(--ink)}
+dialog{border:0;border-radius:var(--r);padding:0;background:var(--surface);color:var(--ink);width:min(40rem,calc(100% - 24px));max-height:85vh}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+dialog .dh{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem 1.1rem;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface)}
+dialog .db{padding:.2rem 1.1rem 1.1rem;overflow:auto;max-height:calc(85vh - 64px)}
+footer{padding-block:2.5rem 3rem;color:var(--muted);font-size:.95rem}
+
+.b-slime{fill:var(--bakt-soft);stroke:var(--bakt);stroke-width:2;stroke-dasharray:6 5;opacity:.9}
+.b-wall{fill:none;stroke:var(--bakt);stroke-width:7}
+.b-mem{fill:var(--surface);stroke:var(--bakt);stroke-width:2}
+.b-chrom{fill:none;stroke:var(--ink);stroke-width:4}
+.b-plas{fill:none;stroke:var(--pilz);stroke-width:3.5}
+.b-flag{fill:none;stroke:var(--bakt);stroke-width:4;stroke-linecap:round}
+.b-lead path{stroke:var(--muted);stroke-width:1.5;fill:none}
+.b-num circle{fill:var(--ink)}
+.b-num text{fill:var(--bg);font-family:var(--f-display);font-weight:800;font-size:17px;text-anchor:middle}
+.legend li{display:flex;gap:.7rem;align-items:flex-start}
+.legend .num{flex:none;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--bg);font-family:var(--f-display);font-weight:800;display:inline-flex;align-items:center;justify-content:center;font-size:.95rem}
+#bauLegend.test .nm:not(.shown){color:transparent;background:var(--surface-2);border-radius:6px;cursor:pointer;user-select:none;display:inline-block;min-width:7rem}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <span class="brand">Bio 9</span>
+    <nav class="nav" aria-label="Abschnitte">
+      <a href="#grundlagen">Grundlagen</a>
+      <a href="#stoffwechsel">Stoffwechsel</a>
+      <a href="#beispiele">Sechs Beispiele</a>
+      <a href="#haltbar">Haltbarmachen</a>
+      <a href="#training">Training</a>
+      <a href="#testtrainer">Testtrainer</a>
+      <a href="#merkzettel">Merkzettel</a>
+    </nav>
+    <button class="btn small" id="openGloss" type="button">Begriffe</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" id="start">
+    <h1>Mikroorganismen und Biotechnologie</h1>
+    <p class="lead">Hier steht alles, was ihr in den Gruppenpräsentationen gehört habt, noch einmal schriftlich. Danach übst du die Reaktionsschemata und prüfst dich für den Test.</p>
+    <ol class="path">
+      <li><a href="#grundlagen"><b>1 Lesen</b><span>Grundlagen, Stoffwechsel, sechs Beispiele, Haltbarmachen</span></a></li>
+      <li><a href="#training"><b>2 Trainieren</b><span>Schemata bauen, Wege erkennen, ordnen, schreiben</span></a></li>
+      <li><a href="#testtrainer"><b>3 Testtrainer</b><span>12 Zufallsfragen mit Auswertung nach Themen</span></a></li>
+    </ol>
+    <div class="card">
+      <h3>Das kannst du nach dieser Seite</h3>
+      <ul class="checks" id="goals"></ul>
+    </div>
+    <p>Tipp: Schreibe die Kästen „Merke“ in dein Heft ab. Wer nur klickt und liest, behält deutlich weniger.</p>
+  </section>
+
+  <!-- ===== GRUNDLAGEN ===== -->
+  <section class="block" id="grundlagen">
+    <header>
+      <h2>Grundlagen: Bakterien und Pilze</h2>
+      <p>Beide gehören zu den Mikroorganismen, sind aber ganz unterschiedlich gebaut.</p>
+    </header>
+    <p><span class="tag b">Bakterien</span> sind <b>Prokaryoten</b>: Sie haben keinen Zellkern. <span class="tag p">Pilze</span> sind <b>Eukaryoten</b>: Ihre Erbinformation liegt in einem echten Zellkern.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Struktur</th><th class="b">Bakterienzelle</th><th class="p">Pilzzelle (z. B. Hefe)</th></tr></thead>
+        <tbody>
+          <tr><td>Erbinformation</td><td>Ringchromosom frei im Zellplasma, kein Zellkern</td><td>in einem echten Zellkern</td></tr>
+          <tr><td>Zellwand</td><td>ja, gibt Form und Stabilität</td><td>ja, aus Chitin</td></tr>
+          <tr><td>Mitochondrien</td><td class="yes">nein</td><td class="yes">ja</td></tr>
+          <tr><td>Vakuole</td><td class="yes">nein</td><td class="yes">ja</td></tr>
+          <tr><td>Plasmide (zusätzliches Erbmaterial)</td><td>ja, oft mit Informationen zum Abbau von Giftstoffen oder zum Schutz vor Medikamenten</td><td class="yes">nein</td></tr>
+          <tr><td>Schleimhülle</td><td>ja, Schutz vor Austrocknung oder Tarnung vor dem Immunsystem</td><td class="yes">nein</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:.8rem">Weitere Teile der Bakterienzelle: <b>Zellmembran</b> (grenzt nach außen ab, regelt den Stoffaustausch), <b>Zellplasma</b> (Füllsubstanz) und die <b>Geißel</b> (zur Fortbewegung). Pilze gibt es als Ein- und als Mehrzeller. Sie vermehren sich durch Zellteilung oder <b>Knospung</b>.</p>
+
+    <h3 style="margin-top:1.8rem">Aufbau einer Bakterienzelle</h3>
+    <figure class="fig" style="margin-inline:0" id="bauFig">
+      <svg viewBox="0 0 620 330" role="img" aria-label="Schema einer stäbchenförmigen Bakterienzelle mit sieben nummerierten Bestandteilen: 1 Schleimhülle, 2 Zellwand, 3 Zellmembran, 4 Zellplasma, 5 Ringchromosom, 6 Plasmide, 7 Geißel">
+        <rect class="b-slime" x="110" y="90" width="330" height="160" rx="80"/>
+        <rect class="b-wall" x="122" y="102" width="306" height="136" rx="68"/>
+        <rect class="b-mem" x="132" y="112" width="286" height="116" rx="58"/>
+        <ellipse class="b-chrom" cx="275" cy="165" rx="55" ry="28"/>
+        <circle class="b-plas" cx="200" cy="200" r="10"/><circle class="b-plas" cx="350" cy="196" r="10"/><circle class="b-plas" cx="355" cy="140" r="10"/>
+        <path class="b-flag" d="M428 170 C470 138 490 204 520 170 S560 140 590 168"/>
+        <g class="b-lead">
+          <path d="M215 58 V94"/><path d="M265 58 V102"/><path d="M315 58 V112"/>
+          <path d="M72 165 H220"/>
+          <path d="M240 300 V212"/>
+          <path d="M400 300 L350 204"/>
+          <path d="M570 108 L552 162"/>
+        </g>
+        <g class="b-num">
+          <circle cx="215" cy="44" r="15"/><text x="215" y="50">1</text>
+          <circle cx="265" cy="44" r="15"/><text x="265" y="50">2</text>
+          <circle cx="315" cy="44" r="15"/><text x="315" y="50">3</text>
+          <circle cx="240" cy="304" r="15"/><text x="240" y="310">4</text>
+          <circle cx="58" cy="165" r="15"/><text x="58" y="171">5</text>
+          <circle cx="404" cy="304" r="15"/><text x="404" y="310">6</text>
+          <circle cx="573" cy="94" r="15"/><text x="573" y="100">7</text>
+        </g>
+      </svg>
+      <figcaption>Schema einer stäbchenförmigen Bakterienzelle, nicht maßstabsgetreu. Nicht jedes Bakterium hat alle Teile.</figcaption>
+    </figure>
+    <div class="card" id="bauLegend">
+      <div class="row-actions" style="margin:0 0 .6rem"><button class="btn small" type="button" id="bauToggle" aria-pressed="false">Namen verdecken (Selbsttest)</button><span class="tally" id="bauHint"></span></div>
+      <ol class="legend" style="margin:0;padding-left:0;list-style:none;display:grid;gap:.5rem">
+        <li><span class="num">1</span><span><b class="nm">Schleimhülle</b>: Schutz vor Austrocknung oder Tarnung vor dem Immunsystem</span></li>
+        <li><span class="num">2</span><span><b class="nm">Zellwand</b>: gibt der Zelle die äußere Form und Stabilität</span></li>
+        <li><span class="num">3</span><span><b class="nm">Zellmembran</b>: grenzt die Zelle nach außen ab und regelt den Stoffaustausch</span></li>
+        <li><span class="num">4</span><span><b class="nm">Zellplasma</b>: Füllsubstanz der Zelle, darin liegen Ringchromosom und Plasmide</span></li>
+        <li><span class="num">5</span><span><b class="nm">Ringchromosom</b>: Erbinformation, liegt frei im Zellplasma (kein Zellkern)</span></li>
+        <li><span class="num">6</span><span><b class="nm">Plasmide</b>: zusätzliches Erbmaterial, oft mit Informationen zum Abbau von Giftstoffen oder zum Schutz vor Medikamenten</span></li>
+        <li><span class="num">7</span><span><b class="nm">Geißel</b>: dient der Fortbewegung</span></li>
+      </ol>
+    </div>
+
+    <h3 style="margin-top:1.8rem">So vermehren sich Bakterien</h3>
+    <figure class="fig" style="margin-inline:0">
+      <svg viewBox="0 0 600 112" role="img" aria-label="Bakterienteilung in fünf Bildern: Ausgangszelle mit einem Ringchromosom, doppeltes Chromosom, längere Zelle, eingeschnürte Zelle, zwei Tochterzellen">
+        <rect class="cell" x="30" y="35" width="60" height="30" rx="15"/>
+        <ellipse class="ring" cx="60" cy="50" rx="10" ry="7"/>
+        <rect class="cell" x="150" y="35" width="60" height="30" rx="15"/>
+        <ellipse class="ring" cx="171" cy="50" rx="8" ry="6"/><ellipse class="ring" cx="189" cy="50" rx="8" ry="6"/>
+        <rect class="cell" x="255" y="35" width="90" height="30" rx="15"/>
+        <ellipse class="ring" cx="278" cy="50" rx="9" ry="6"/><ellipse class="ring" cx="322" cy="50" rx="9" ry="6"/>
+        <path class="cell" d="M390 35 Q420 45 450 35 A15 15 0 0 1 450 65 Q420 55 390 65 A15 15 0 0 1 390 35 Z"/>
+        <ellipse class="ring" cx="398" cy="50" rx="9" ry="6"/><ellipse class="ring" cx="442" cy="50" rx="9" ry="6"/>
+        <rect class="cell" x="482" y="35" width="48" height="30" rx="15"/><rect class="cell" x="546" y="35" width="48" height="30" rx="15"/>
+        <ellipse class="ring" cx="506" cy="50" rx="9" ry="6"/><ellipse class="ring" cx="570" cy="50" rx="9" ry="6"/>
+        <text class="st" x="60" y="100">Start</text><text class="st" x="180" y="100">1</text><text class="st" x="300" y="100">2</text><text class="st" x="420" y="100">3</text><text class="st" x="538" y="100">4</text>
+      </svg>
+      <figcaption>Die Ringe sind die Ringchromosomen. Die Zahlen gehören zu den Schritten unten.</figcaption>
+    </figure>
+    <ol>
+      <li>Verdopplung des Chromosoms</li>
+      <li>Längenwachstum der Zelle</li>
+      <li>Einschnürung der Zelle in der Mitte</li>
+      <li>Teilung: zwei Tochterzellen mit identischem Erbmaterial, je ein Ringchromosom</li>
+    </ol>
+    <div class="card">
+      <h3>Rechne mit: Bakterien verdoppeln sich</h3>
+      <p>Bei optimalen Bedingungen dauert eine Zellteilung 20 Minuten. Du startest mit einem einzigen Bakterium.</p>
+      <div class="slider">
+        <input type="range" id="dbl" min="0" max="15" step="1" value="3" aria-label="Zahl der Verdopplungen">
+        <div><div id="dblTime" class="tally"></div><div class="big" id="dblNum"></div></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:1.8rem">Die vier Wachstumsphasen</h3>
+    <figure class="fig" style="margin-inline:0">
+      <svg viewBox="0 0 560 220" role="img" aria-label="Wachstumskurve von Bakterien in vier Phasen: flache Anlaufphase, steiler Anstieg, Plateau, Abfall">
+        <rect class="band1" x="40" y="10" width="80" height="170"/><rect class="band2" x="120" y="10" width="142" height="170"/>
+        <rect class="band3" x="262" y="10" width="138" height="170"/><rect class="band4" x="400" y="10" width="140" height="170"/>
+        <path class="axis" d="M40 10 V180 H540"/>
+        <path class="curve" d="M40 172 C80 172 100 170 120 164 C160 150 200 62 262 44 C300 38 360 38 400 42 C440 48 490 110 540 150"/>
+        <text class="st" style="font-size:20px" x="80" y="36">1</text><text class="st" style="font-size:20px" x="191" y="36">2</text>
+        <text class="st" style="font-size:20px" x="331" y="36">3</text><text class="st" style="font-size:20px" x="470" y="36">4</text>
+        <text class="st" x="290" y="205">Zeit</text>
+        <text class="st" transform="translate(16 95) rotate(-90)">Zahl der Bakterien</text>
+      </svg>
+    </figure>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Phase</th><th>Merkmal</th></tr></thead>
+        <tbody>
+          <tr><td><b>1 Anlaufphase</b></td><td>Einstellen auf neue Bedingungen (Nährmedium) durch Anpassen des Stoffwechsels</td></tr>
+          <tr><td><b>2 exponentielle Phase</b></td><td>maximale Vermehrungsrate, optimale Bedingungen</td></tr>
+          <tr><td><b>3 stationäre Phase</b></td><td>Ressourcen werden knapp, Sterberate und Vermehrungsrate sind im Gleichgewicht, die Bakterienzahl stagniert</td></tr>
+          <tr><td><b>4 Absterbephase</b></td><td>giftige Stoffwechselprodukte, Ressourcen erschöpft, die Bakterien sterben ab</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="merke">
+      <h3>Merke</h3>
+      <ul>
+        <li>Bakterien: Prokaryoten, Ringchromosom, Plasmide, Schleimhülle, keine Mitochondrien und keine Vakuole.</li>
+        <li>Pilze: Eukaryoten, Zellkern, Zellwand aus Chitin, Mitochondrien, Vakuole.</li>
+        <li>Bakterien vermehren sich durch Zweiteilung, alle 20 Minuten bei optimalen Bedingungen.</li>
+        <li>Wachstumsphasen: Anlauf, exponentiell, stationär, Absterben.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== STOFFWECHSEL ===== -->
+  <section class="block" id="stoffwechsel">
+    <header>
+      <h2>Stoffwechsel: Zellatmung und Gärungen</h2>
+      <p>Mikroorganismen brauchen Energie. Wie sie diese gewinnen, hängt von der Nahrung und vom Sauerstoff ab.</p>
+    </header>
+    <div class="grid2">
+      <div class="card"><h3>heterotroph</h3><p>Der Organismus nimmt energiereiche organische Stoffe auf, um körpereigene Stoffe aufzubauen und Energie für Lebensvorgänge bereitzustellen. Viele Mikroorganismen leben so, z. B. auf Lebensmitteln.</p></div>
+      <div class="card"><h3>aerob</h3><p>Stoffwechsel <b>mit</b> Sauerstoff, also Zellatmung. Die meisten Mikroorganismen arbeiten so.</p></div>
+      <div class="card"><h3>anaerob</h3><p>Stoffwechsel <b>ohne</b> Sauerstoff. Diese Prozesse heißen <b>Gärungsprozesse</b>.</p></div>
+      <div class="card"><h3>Anaerobier</h3><p>Mikroorganismen, die ohne Sauerstoff überleben können. Beispiel: <i>Clostridium botulinum</i> (ausschließlich anaerob).</p></div>
+    </div>
+
+    <h3 style="margin-top:2rem">Die vier Stoffwechselwege</h3>
+    <div class="grid2" style="margin-top:.8rem">
+      <div class="card">
+        <h3>Zellatmung</h3>
+        <div class="formula">Glucose + Sauerstoff → Kohlenstoffdioxid + Wasser</div>
+        <p><b>Mit Sauerstoff.</b> Liefert <b>viel Energie</b>.</p>
+      </div>
+      <div class="card">
+        <h3>Milchsäuregärung</h3>
+        <div class="formula">Glucose → Milchsäure</div>
+        <p><b>Ohne Sauerstoff.</b> Liefert <b>wenig Energie</b>. Typisch: <span class="tag b">Milchsäurebakterien</span> (z. B. <i>Lactobacillus</i>).</p>
+      </div>
+      <div class="card">
+        <h3>alkoholische Gärung</h3>
+        <div class="formula">Glucose → Ethanol (Alkohol) + Kohlenstoffdioxid</div>
+        <p><b>Ohne Sauerstoff.</b> Liefert <b>wenig Energie</b>. Typisch: <span class="tag p">Hefen</span> (<i>Saccharomyces cerevisiae</i>).</p>
+      </div>
+      <div class="card">
+        <h3>Essigsäurebildung</h3>
+        <div class="formula">Ethanol (Alkohol) + Sauerstoff → Essigsäure + Wasser</div>
+        <p><b>Nur mit Sauerstoff.</b> Typisch: <span class="tag b">Essigsäurebakterien</span>. Aus Wein wird Essig. Manche bauen die Essigsäure noch weiter zu Kohlenstoffdioxid und Wasser ab.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Was macht wer, wenn Sauerstoff da ist?</h3>
+      <p>Wähle die Bedingung und lies, wie sich vier wichtige Mikroorganismen verhalten.</p>
+      <div class="seg" role="group" aria-label="Sauerstoff">
+        <button type="button" id="o2yes" aria-pressed="true">Mit Sauerstoff</button>
+        <button type="button" id="o2no" aria-pressed="false">Ohne Sauerstoff</button>
+      </div>
+      <div class="orgs" id="orgs" aria-live="polite"></div>
+    </div>
+    <div class="merke">
+      <h3>Merke</h3>
+      <ul>
+        <li>Gärung läuft <b>immer ohne Sauerstoff</b> ab und liefert <b>viel weniger Energie</b> als die Zellatmung.</li>
+        <li><b>Milchsäurebakterien</b> vertragen Sauerstoff, betreiben aber trotzdem nur Gärung.</li>
+        <li><b>Hefen „haben die Wahl“</b> (fakultative Anaerobier): Mit Sauerstoff bevorzugen sie aus energetischen Gründen die Zellatmung. Fehlt Sauerstoff, stellen sie auf alkoholische Gärung um und vermehren sich trotzdem weiter.</li>
+        <li>Steigt der Alkoholgehalt über ca. 15–18 %, sterben die Hefezellen selbst ab.</li>
+        <li>Alkohol wird nur <b>mit Sauerstoff</b> von Essigsäurebakterien zu Essigsäure.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== BEISPIELE ===== -->
+  <section class="block" id="beispiele">
+    <header>
+      <h2>Die sechs Beispiele aus den Gruppen</h2>
+      <p>Zu jedem Produkt musst du Organismus, Substrat, Sauerstoffbedarf, entstehende Stoffe und den Gegenspieler nennen können. Das Substrat ist der Zucker, den die Mikroorganismen umsetzen.</p>
+    </header>
+    <div id="produkte"></div>
+    <div class="merke">
+      <h3>Merke</h3>
+      <ul>
+        <li><span class="tag b">Milchsäuregärung</span> bei Käse, Joghurt, Sauerkraut, Silage. Die Säure macht sauer und haltbar.</li>
+        <li><span class="tag p">alkoholische Gärung</span> bei Bier und Wein. Das Kohlenstoffdioxid entweicht, der Alkohol bleibt.</li>
+        <li>Sauerteig: <b>beides gemeinsam</b>. Die Hefen lockern den Teig, die Säuren verbessern Geschmack, Verdaulichkeit und Haltbarkeit.</li>
+        <li>Joghurt: erst erhitzen, <b>dann</b> die Starterkultur zugeben.</li>
+        <li>Backen: Das Kohlenstoffdioxid lockert den Teig, der Alkohol verdampft bei den hohen Backtemperaturen.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== HALTBAR ===== -->
+  <section class="block" id="haltbar">
+    <header>
+      <h2>Lebensmittelverderb und Haltbarmachen</h2>
+      <p>Frische Lebensmittel sind unvermeidbar mit Mikroorganismen behaftet: Sie haben einen vielseitigen Stoffwechsel, viele Ausbreitungswege und eine hohe Vermehrungsrate.</p>
+    </header>
+    <div class="grid2">
+      <div class="card"><h3>Feuchtigkeit</h3><p>Ohne ausreichend Wasser vermehren sich Mikroorganismen nicht.</p></div>
+      <div class="card"><h3>Milieu</h3><p>Sie brauchen ein passendes Milieu, meist neutral, aerob oder anaerob.</p></div>
+      <div class="card"><h3>Temperatur</h3><p>Sie brauchen entsprechende Temperaturen. Konservierung bremst ihre Vermehrung oder tötet sie ab.</p></div>
+    </div>
+
+    <h3 style="margin-top:1.8rem">Gefährliche Mikroorganismen</h3>
+    <div class="grid2" style="margin-top:.8rem">
+      <div class="card"><h3>Salmonellen</h3><p><span class="tag b">Bakterien</span> in Eiern und rohem Fleisch. Sie lösen eine heftige Durchfallerkrankung aus.</p></div>
+      <div class="card"><h3>Schimmelpilze</h3><p><span class="tag p">Pilze</span> Ihr nicht sichtbares <b>Mycel</b> (Pilzgeflecht) durchzieht das Lebensmittel. Befallene Nahrung darf nicht mehr gegessen werden, weil Zellbestandteile und Stoffwechselprodukte (<b>Mykotoxine</b>) giftig sind.</p></div>
+      <div class="card"><h3><i>Clostridium botulinum</i></h3><p><span class="tag b">Bakterien</span> auf Fleisch, Fisch und in Gemüsekonserven. Stoffwechsel ausschließlich anaerob, bildet <b>Botulinum-Toxine</b> (Synapsengifte). Die <b>Sporen</b> werden erst bei über 100 °C abgetötet.</p></div>
+    </div>
+
+    <h3 style="margin-top:1.8rem">Konservierungsmethoden</h3>
+    <div class="scroll" style="margin-top:.8rem">
+      <table>
+        <thead><tr><th>Kategorie</th><th>Methode</th><th>Wirkung und Folgen</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="2"><b>Feuchtigkeit entziehen</b></td><td>Räuchern, Salzen (Pökeln), Zuckern</td><td>entzieht dem Lebensmittel bis zu 80 % des Wassers, Bakterien und Pilze können sich nicht mehr vermehren</td></tr>
+          <tr><td>Trocknen</td><td>Obst bei milden 70 °C: Vitamine bleiben weitgehend, Mineralsalze vollständig erhalten</td></tr>
+          <tr><td rowspan="4"><b>Temperatur ändern</b></td><td>Erhitzen / Sterilisieren über 100 °C</td><td>tötet Mikroorganismen ab, Lebensmittel werden oft bekömmlicher; Vitamine werden zerstört, Mineralsalze ins Kochwasser ausgespült. Konservengemüse wird kurz und stark erhitzt und unter Luftabschluss in Dosen gefüllt</td></tr>
+          <tr><td>Kühlen im Kühlschrank</td><td>verlangsamt die Vermehrung; bei Kühlschrank-Lagerung gehen bis zu 30 % der Vitamine verloren</td></tr>
+          <tr><td>Schockfrosten unter −80 °C</td><td>nahezu alle Vitamine bleiben erhalten</td></tr>
+          <tr><td>langsames Einfrieren bei −18 °C (zu Hause)</td><td>mehr Vitaminverlust als beim Schockfrosten</td></tr>
+          <tr><td><b>Milieu ändern</b></td><td>gezielt mit Milchsäurebakterien (Sauerkraut, Silage)</td><td>saures Milieu, in dem sich andere Mikroorganismen nicht gut vermehren</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:.8rem">Bei <b>ungekühlter Lagerung</b> verlieren Obst und Gemüse je nach Sorte schon in der ersten Woche bis zu 50 % ihres Vitamingehalts.</p>
+    <div class="merke">
+      <h3>Merke</h3>
+      <ul>
+        <li>Zum Vermehren brauchen Mikroorganismen <b>Feuchtigkeit, passendes Milieu und passende Temperatur</b>.</li>
+        <li>Zuckern, Salzen, Räuchern und Trocknen entziehen <b>Wasser</b>. Erhitzen, Kühlen und Frosten ändern die <b>Temperatur</b>.</li>
+        <li>Sporen von <i>Clostridium botulinum</i> überstehen Kochen. Erst über 100 °C werden sie abgetötet.</li>
+        <li>Schockfrosten erhält fast alle Vitamine. Ungekühlt gelagertes Gemüse verliert schon in einer Woche bis zu 50 %.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== TRAINING ===== -->
+  <section class="block" id="training">
+    <header>
+      <h2>Training</h2>
+      <p>Hier darfst du Fehler machen. Du bekommst sofort eine Rückmeldung und kannst jede Aufgabe wiederholen.</p>
+    </header>
+
+    <div class="trainer card" id="t-scheme">
+      <h3>1 Reaktionsschemata bauen</h3>
+      <p class="how">Tippe einen Baustein an und danach das Feld, in das er gehört. Tippe auf ein gefülltes Feld, um den Baustein zurückzulegen. Beantworte auch die beiden Fragen darunter.</p>
+      <div id="schemeHost"></div>
+    </div>
+
+    <div class="trainer card">
+      <h3>2 Welcher Stoffwechselweg läuft ab?</h3>
+      <p class="how">Entscheide pro Situation. Beachte immer: Gibt es Sauerstoff? Wer ist beteiligt?</p>
+      <div id="sitHost"></div>
+      <p class="tally" id="sitTally"></p>
+    </div>
+
+    <div class="trainer card">
+      <h3>3 Die sechs Beispiele ergänzen</h3>
+      <p class="how">Wähle in jeder Zeile Organismus, Substrat und entstehende Stoffe.</p>
+      <div class="scroll"><table id="fillTable" style="min-width:42rem"></table></div>
+      <div class="row-actions">
+        <button class="btn primary" type="button" id="fillCheck">Prüfen</button>
+        <button class="btn" type="button" id="fillSolve">Lösung zeigen</button>
+        <button class="btn" type="button" id="fillReset">Zurücksetzen</button>
+        <span class="msg" id="fillMsg" role="status"></span>
+      </div>
+    </div>
+
+    <div class="trainer card">
+      <h3>4 Herstellung in die richtige Reihenfolge bringen</h3>
+      <p class="how">Verschiebe die Schritte mit den Pfeilen. Erster Schritt oben.</p>
+      <h3 style="font-size:1.05rem;margin-top:1rem">Bier brauen</h3>
+      <div id="ordBier"></div>
+      <h3 style="font-size:1.05rem;margin-top:1.4rem">Sauerkraut herstellen</h3>
+      <div id="ordKraut"></div>
+    </div>
+
+    <div class="trainer card">
+      <h3>5 Haltbarmachen: Welche Kategorie?</h3>
+      <p class="how">Tippe die passende Kategorie an. Ein falscher Tipp zählt als Fehlversuch, du kannst es aber erneut versuchen.</p>
+      <div id="sortHost"></div>
+      <p class="tally" id="sortTally"></p>
+    </div>
+
+    <div class="trainer card tfgrid">
+      <h3>6 Stimmt’s? Schnellrunde</h3>
+      <p class="how">Zehn Aussagen. Eine davon klingt richtig, ist es aber nicht, und umgekehrt.</p>
+      <div id="tfHost"></div>
+      <p class="tally" id="tfTally"></p>
+    </div>
+
+    <div class="trainer card">
+      <h3>7 Schreiben wie im Test</h3>
+      <p class="how">Im Test gibt es Freitextaufgaben. Schreibe zuerst deine eigene Antwort. Erst danach zeigst du die Beispiellösung an und hakst ab, was du erfüllt hast.</p>
+      <div id="freiHost"></div>
+    </div>
+  </section>
+
+  <!-- ===== TESTTRAINER ===== -->
+  <section class="block" id="testtrainer">
+    <header>
+      <h2>Testtrainer</h2>
+      <p>12 Fragen, drei aus jedem Themenbereich, jedes Mal neu gemischt. Die Antwort wird sofort bewertet und lässt sich nicht mehr ändern, wie im echten Test.</p>
+    </header>
+    <div id="quizHost"></div>
+  </section>
+
+  <!-- ===== MERKZETTEL ===== -->
+  <section class="block" id="merkzettel">
+    <header>
+      <h2>Merkzettel</h2>
+      <p>Alles Wichtige auf einen Blick und alle Fachbegriffe.</p>
+    </header>
+    <div class="card">
+      <h3>Die vier Reaktionen</h3>
+      <div class="formula">Zellatmung: Glucose + Sauerstoff → Kohlenstoffdioxid + Wasser (viel Energie)</div>
+      <div class="formula">Milchsäuregärung: Glucose → Milchsäure (wenig Energie, ohne Sauerstoff)</div>
+      <div class="formula">alkoholische Gärung: Glucose → Ethanol + Kohlenstoffdioxid (wenig Energie, ohne Sauerstoff)</div>
+      <div class="formula">Essigsäurebildung: Ethanol + Sauerstoff → Essigsäure + Wasser (nur mit Sauerstoff)</div>
+    </div>
+    <div class="card">
+      <h3>Fachbegriffe</h3>
+      <dl class="gloss" id="glossMain"></dl>
+    </div>
+  </section>
+
+  <footer>
+    <p>Grundlage: Schulbuch Biologie 9 (S. 24–25), Gruppenpräsentationen und Tafeltabelle.</p>
+  </footer>
+</main>
+
+<dialog id="glossDlg" aria-label="Fachbegriffe">
+  <div class="dh"><b>Fachbegriffe</b><button class="btn small" type="button" id="closeGloss">Schließen</button></div>
+  <div class="db"><dl class="gloss" id="glossDlgList"></dl></div>
+</dialog>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s);};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function h(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!==undefined)e.innerHTML=html;return e;}
+function nf(n){return n.toLocaleString("de-DE");}
+
+/* ---------- Lernziele ---------- */
+var GOALS=[
+ "die Begriffe heterotroph, aerob, anaerob und Anaerobier mit eigenen Worten erklären",
+ "die Reaktionsschemata von Zellatmung, Milchsäuregärung und alkoholischer Gärung aufschreiben",
+ "zu jedem der sechs Produkte Organismus, Substrat, Sauerstoffbedarf, entstehende Stoffe und Gegenspieler nennen",
+ "erklären, warum die Hefe „die Wahl hat“",
+ "die Schritte der Herstellung (Joghurt, Käse, Bier, Sauerkraut) in die richtige Reihenfolge bringen",
+ "Konservierungsmethoden den Kategorien Feuchtigkeitsentzug, Temperaturänderung und Milieu zuordnen",
+ "nennen, was Mikroorganismen zur Vermehrung auf Lebensmitteln brauchen",
+ "den Aufbau von Bakterien- und Pilzzelle vergleichen und die Zweiteilung beschreiben",
+ "ein unbekanntes Lebensmittel mit diesem Wissen bewerten: Welche Organismen? Aerob oder anaerob? Welche Konservierung?"
+];
+$("#goals").innerHTML=GOALS.map(function(g,i){return '<li><label><input type="checkbox" id="goal'+i+'"><span>'+g+'</span></label></li>';}).join("");
+
+/* ---------- Verdopplungsrechner ---------- */
+var dbl=$("#dbl");
+function upDbl(){var n=+dbl.value,min=n*20;var t=min<60?min+" min":(Math.floor(min/60)+" h"+(min%60?" "+(min%60)+" min":""));
+ $("#dblTime").textContent="Nach "+t+" ("+n+" Verdopplungen) sind es:";$("#dblNum").textContent=nf(Math.pow(2,n))+(n===1?" Bakterien":" Bakterien");}
+dbl.addEventListener("input",upDbl);upDbl();
+
+/* ---------- Sauerstoff-Schalter ---------- */
+var ORG={
+ yes:[
+  {n:"Hefe",r:"Zellatmung",s:"Mit Sauerstoff bevorzugt sie aus energetischen Gründen die Zellatmung.",no:false},
+  {n:"Milchsäurebakterien",r:"Milchsäuregärung",s:"Sie tolerieren Sauerstoff, betreiben aber trotzdem nur Gärung.",no:false},
+  {n:"Essigsäurebakterien",r:"Alkohol → Essigsäure",s:"Das geht nur mit Sauerstoff.",no:false},
+  {n:"Clostridium botulinum",r:"kein Stoffwechsel",s:"Sein Stoffwechsel läuft ausschließlich anaerob.",no:true}
+ ],
+ no:[
+  {n:"Hefe",r:"alkoholische Gärung",s:"Sie stellt um und vermehrt sich weiter.",no:false},
+  {n:"Milchsäurebakterien",r:"Milchsäuregärung",s:"Sie arbeiten unverändert weiter.",no:false},
+  {n:"Essigsäurebakterien",r:"kann Alkohol nicht umsetzen",s:"Ohne Sauerstoff keine Essigsäure.",no:true},
+  {n:"Clostridium botulinum",r:"Gärung läuft",s:"Hier ist er aktiv und kann Botulinum-Toxine bilden, z. B. in luftdicht verschlossenen Konserven.",no:false}
+ ]
+};
+function showOrgs(k){
+ $("#o2yes").setAttribute("aria-pressed",k==="yes");$("#o2no").setAttribute("aria-pressed",k==="no");
+ $("#orgs").innerHTML=ORG[k].map(function(o){return '<div class="org'+(o.no?' no':'')+'"><b>'+o.n+'</b><span class="res">'+o.r+'</span><small>'+o.s+'</small></div>';}).join("");
+}
+$("#o2yes").addEventListener("click",function(){showOrgs("yes");});
+$("#o2no").addEventListener("click",function(){showOrgs("no");});
+showOrgs("yes");
+
+/* ---------- Die sechs Beispiele ---------- */
+var PRODUCTS=[
+ {name:"Käse",tags:'<span class="tag b">Milchsäurebakterien</span>',
+  org:"Milchsäurebakterien (z. B. <i>Lactobacillus</i>), bei manchen Sorten zusätzlich Edelschimmelpilze (z. B. Blauschimmel)",
+  sub:"Milchzucker (Laktose)",o2:"toleriert Sauerstoff, betreibt aber Gärung",
+  prod:"Milchsäure (Milchsäuregärung); zusammen mit Lab wird die Milch dick gelegt",
+  enemy:"unerwünschte Bakterien und Schimmel bei nicht ausreichend erhitzter Rohmilch oder mangelnder Hygiene",
+  steps:["Die Milch wird im Labor geprüft. Außer für Rohmilchkäse wird sie pasteurisiert (mindestens 72 °C).","Milchsäurebakterien und Lab (Enzymgemisch aus dem Labmagen junger Wiederkäuer) legen die Milch dick, sie wird dickflüssig und gallertartig.","Aus der dickgelegten Milch entsteht der Käsebruch. Je kleiner die Körner, desto härter der Käse. Die Flüssigkeit heißt Molke.","Formen und Pressen, Salzbad, Reifekeller, Qualitätskontrolle."],
+  note:"Edelschimmelpilze wie Blauschimmel sind für den Menschen völlig unbedenklich."},
+ {name:"Joghurt",tags:'<span class="tag b">Milchsäurebakterien</span>',
+  org:"<i>Lactobacillus bulgaricus</i> und <i>Streptococcus thermophilus</i> (Starterkulturen)",
+  sub:"Milchzucker (Laktose)",o2:"toleriert Sauerstoff, betreibt aber Gärung",
+  prod:"Milchsäure (Milchsäuregärung); die Milch wird dickflüssig und säuerlich (Dickmilch)",
+  enemy:"die ursprünglichen Bakterien der Rohmilch, deshalb vorher Erhitzen auf ca. 90 °C",
+  steps:["Milch auf ca. 90 °C erhitzen (tötet auch die Milchsäurebakterien der Milch ab).","Auf ca. 36 °C herunterkühlen.","Starterkulturen zugeben (die gewünschten Milchsäurebakterien).","Milchsäuregärung: Milchzucker wird zu Milchsäure, die Milch dickt ein (Dicklegen, in der Großproduktion mehrere Stunden).","Abkühlen und abfüllen. Fertiger Joghurt enthält lebende Mikroorganismen."]},
+ {name:"Sauerkraut und Silage",tags:'<span class="tag b">Milchsäurebakterien</span>',
+  org:"Milchsäurebakterien, die schon auf Weißkohl bzw. Gras sitzen",
+  sub:"Zucker aus dem zerkleinerten Pflanzenmaterial",o2:"anaerob",
+  prod:"Milchsäure (Milchsäuregärung); macht haltbar und sauer",
+  enemy:"Schimmel, wenn die Salzlake den Kohl nicht ganz bedeckt; Fäulniserreger, wenn die Silage-Folie nicht luftdicht ist",
+  steps:["Weißkohl hobeln und salzen (1–5 %). Das Salz entzieht Wasser und konserviert.","Die Salzlake muss den Kohl komplett bedecken (Luftabschluss, sonst Schimmel).","Gärung bei 20 °C: zwei Tage bis zwei Wochen.","Reifung im kühlen Raum: 4–6 Wochen."],
+  note:"Silage: zerkleinertes Gras oder Mais, luftdicht verpackt (Folie oder Silo). Das saure Milieu verhindert das Wachstum anderer Mikroorganismen."},
+ {name:"Bier",tags:'<span class="tag p">Hefen</span>',
+  org:"Brauhefe (<i>Saccharomyces cerevisiae</i>)",sub:"Malzzucker aus der Würze (gekeimte Gerste)",o2:"ohne Sauerstoff",
+  prod:"Alkohol + Kohlenstoffdioxid (alkoholische Gärung)",
+  enemy:"wilde, ungeeignete Mikroorganismen aus der Luft, deshalb gezielt Brauhefe",
+  steps:["Gerste wird zu Malz: Keimen lassen, dann Darren stoppt die Keimung.","Maischen: Enzyme setzen Stärke zu Malzzucker um (bei ca. 65 °C).","Läutern: Die Maische wird zur Würze. Die Würze wird mit Hopfen gekocht (bitterer Geschmack, bessere Haltbarkeit).","Mit der Brauhefe beginnt der Gärprozess: Hauptgärung (mehrere Tage, CO₂ entweicht).","Nachgärung in geschlossenen Flaschen oder Fässern (CO₂ löst sich als Kohlensäure im Bier).","Reifung."],
+  note:"Reinheitsgebot (1516): Gerste, Hopfen, Wasser; heute zusätzlich Hefe."},
+ {name:"Wein",tags:'<span class="tag p">Hefen</span>',
+  org:"(Reinzucht-)Hefen",sub:"Traubenzucker im Most",o2:"ohne Sauerstoff",
+  prod:"Alkohol + Kohlenstoffdioxid (alkoholische Gärung)",
+  enemy:"Essigsäurebakterien: Mit Sauerstoff wird der Alkohol zu Essigsäure, aus Wein wird Essig",
+  steps:["Weinlese, Entrappen, Pressen: Der Traubensaft heißt Most.","Alkoholische Gärung im Edelstahltank mit Hefen von der Traubenschale oder zugesetzten Reinzuchthefen. Das CO₂ entweicht über Gärröhrchen, der Alkohol bleibt. Dauer 2–3 Wochen, es entsteht Jungwein.","Danach: Abstechen, Filtern, Lagern, Abfüllen."],
+  note:"Wird der ganze Zucker vergoren, entsteht trockener Wein. Stoppt der Winzer die Gärung früh, bleibt er süßer und hat weniger Alkohol. Rotwein wird auf der Maische (mit Schalen) vergoren, das gibt Farbe und Aroma."},
+ {name:"Sauerteig",tags:'<span class="tag b">Milchsäurebakterien</span> <span class="tag p">Hefen</span>',
+  org:"Milchsäurebakterien und Hefen gemeinsam",sub:"Zucker aus dem Getreide (Mehl)",o2:"Milchsäurebakterien anaerob; Hefen ohne Sauerstoff",
+  prod:"Milchsäurebakterien: Milchsäure + etwas Essigsäure (ideal 80:20); Hefen: Alkohol + Kohlenstoffdioxid",
+  enemy:"Fäulniserreger im Mehl; regelmäßiges Füttern hält das saure Milieu",
+  steps:["Anstellgut = Teil eines reifen Sauerteigs, wird alle 10–14 Tage mit Mehl und Wasser gefüttert. Reinzuchtsauer = definiertes Gemisch aus Milchsäurebakterien und Hefen.","Die Hefen bilden Ethanol (verdampft beim Backen) und CO₂ (lockert den Teig).","Die Säuren verbessern Geschmack, Verdaulichkeit und Haltbarkeit."],
+  note:"Ohne Sauerteig gibt es keine Roggenmehl-Backwaren: Die Säuren sorgen dafür, dass das Brot aufgeht und nicht flach und hart bleibt."}
+];
+$("#produkte").innerHTML=PRODUCTS.map(function(p){
+ return '<details class="prod" open><summary>'+p.name+' '+p.tags+'</summary><div class="body"><dl class="facts">'+
+ '<dt>Organismus</dt><dd>'+p.org+'</dd><dt>Substrat</dt><dd>'+p.sub+'</dd><dt>Sauerstoff</dt><dd>'+p.o2+'</dd>'+
+ '<dt>Entsteht</dt><dd>'+p.prod+'</dd><dt>Gegenspieler</dt><dd>'+p.enemy+'</dd></dl>'+
+ '<b>Herstellung</b><ol>'+p.steps.map(function(s){return '<li>'+s+'</li>';}).join("")+'</ol>'+(p.note?'<p>'+p.note+'</p>':'')+'</div></details>';
+}).join("");
+
+/* ---------- Quiz-Karte (Einzelauswahl und Stimmt/Stimmt nicht) ---------- */
+function qCard(q,onAnswer){
+ var card=h("div","qcard");
+ card.innerHTML='<p class="qtext"></p><div class="opts" role="group"></div><div class="fb" aria-live="polite" hidden></div>';
+ $(".qtext",card).textContent=q.q;
+ var opts=q.tf?[{t:"Stimmt",v:true},{t:"Stimmt nicht",v:false}]:sh([q.a].concat(q.w)).map(function(t){return {t:t,v:t===q.a};});
+ var box=$(".opts",card),fb=$(".fb",card),done=false,btns=[];
+ opts.forEach(function(o){
+  var b=h("button","opt");b.type="button";b.textContent=o.t;btns.push({b:b,o:o});
+  b.addEventListener("click",function(){
+   if(done)return;done=true;
+   var correct=q.tf?(o.v===q.a):o.v;
+   btns.forEach(function(x){
+    var isRight=q.tf?(x.o.v===q.a):x.o.v;x.b.disabled=true;
+    if(isRight)x.b.classList.add("ok");else if(x.b===b)x.b.classList.add("bad");else x.b.classList.add("dim");
+   });
+   fb.hidden=false;
+   var right=q.tf?(q.a?"Stimmt":"Stimmt nicht"):q.a;
+   fb.innerHTML=(correct?"<b>Richtig.</b> ":"<b>Nicht ganz.</b> Richtig ist: „"+right+"“. ")+(q.e||"");
+   if(onAnswer)onAnswer(correct);
+  });
+  box.appendChild(b);
+ });
+ return card;
+}
+
+/* ---------- Training 1: Schemata bauen ---------- */
+var CHIPS=["Glucose","Sauerstoff","Kohlenstoffdioxid","Wasser","Milchsäure","Ethanol (Alkohol)","Essigsäure","Stärke"];
+var SCHEMES=[
+ {name:"Zellatmung",L:["Glucose","Sauerstoff"],R:["Kohlenstoffdioxid","Wasser"],o2:"mit Sauerstoff",en:"viel Energie"},
+ {name:"Milchsäuregärung",L:["Glucose"],R:["Milchsäure"],o2:"ohne Sauerstoff",en:"wenig Energie"},
+ {name:"alkoholische Gärung",L:["Glucose"],R:["Ethanol (Alkohol)","Kohlenstoffdioxid"],o2:"ohne Sauerstoff",en:"wenig Energie"},
+ {name:"Essigsäurebildung",L:["Ethanol (Alkohol)","Sauerstoff"],R:["Essigsäure","Wasser"],o2:"mit Sauerstoff",en:null}
+];
+function schemeBuilder(host){
+ var cur=0,order,placed,sel,o2v,env,checked;
+ function reset(){order=sh(CHIPS);var S=SCHEMES[cur];placed={L:S.L.map(function(){return null;}),R:S.R.map(function(){return null;})};sel=null;o2v="";env="";checked=null;}
+ function used(c){return placed.L.indexOf(c)>-1||placed.R.indexOf(c)>-1;}
+ function render(){
+  var S=SCHEMES[cur];
+  var html='<div class="seg" role="group" aria-label="Schema wählen" style="flex-wrap:wrap">'+SCHEMES.map(function(s,i){return '<button type="button" data-sch="'+i+'" aria-pressed="'+(i===cur)+'">'+s.name+'</button>';}).join("")+'</div>';
+  html+='<p style="margin:.8rem 0 0"><b>Bausteine</b></p><div class="bank">'+order.filter(function(c){return !used(c);}).map(function(c){return '<button type="button" class="chip" data-chip="'+c+'" aria-pressed="'+(sel===c)+'">'+c+'</button>';}).join("")+'</div>';
+  function slot(side,i){var v=placed[side][i];var cl="slot"+(v?" fill":"");
+   if(checked){cl+=(S[side].indexOf(v)>-1)?" ok":" bad";}
+   return '<button type="button" class="'+cl+'" data-slot="'+side+i+'" aria-label="'+(side==="L"?"Ausgangsstoff ":"Produkt ")+(i+1)+(v?": "+v:": leer")+'">'+(v||"&nbsp;")+'</button>';}
+  html+='<div class="eq">'+placed.L.map(function(_,i){return (i?'<span class="arrow">+</span>':"")+slot("L",i);}).join("")+'<span class="arrow">→</span>'+placed.R.map(function(_,i){return (i?'<span class="arrow">+</span>':"")+slot("R",i);}).join("")+'</div>';
+  html+='<div class="extras"><label>Sauerstoff nötig?<select id="selO2"><option value="">wählen</option><option>mit Sauerstoff</option><option>ohne Sauerstoff</option></select></label>';
+  if(S.en)html+='<label>Energieausbeute<select id="selEn"><option value="">wählen</option><option>viel Energie</option><option>wenig Energie</option></select></label>';
+  html+='</div><div class="row-actions"><button class="btn primary" type="button" data-act="check">Prüfen</button><button class="btn" type="button" data-act="solve">Lösung zeigen</button><button class="btn" type="button" data-act="reset">Neu mischen</button><span class="msg" role="status" id="schMsg"></span></div>';
+  host.innerHTML=html;
+  var so=$("#selO2",host);so.value=o2v;if(checked)so.className=o2v===S.o2?"ok":"bad";
+  var se=$("#selEn",host);if(se){se.value=env;if(checked)se.className=env===S.en?"ok":"bad";}
+  if(checked){var m=$("#schMsg",host);m.textContent=checked.msg;m.className="msg "+(checked.all?"ok":"bad");}
+ }
+ host.addEventListener("change",function(e){if(e.target.id==="selO2")o2v=e.target.value;if(e.target.id==="selEn")env=e.target.value;});
+ host.addEventListener("click",function(e){
+  var t=e.target.closest("button");if(!t)return;var S=SCHEMES[cur];
+  if(t.dataset.sch!==undefined){cur=+t.dataset.sch;reset();render();return;}
+  if(t.dataset.chip){sel=(sel===t.dataset.chip)?null:t.dataset.chip;render();return;}
+  if(t.dataset.slot){var side=t.dataset.slot[0],i=+t.dataset.slot.slice(1);
+   if(placed[side][i]){placed[side][i]=null;checked=null;}
+   else if(sel){placed[side][i]=sel;sel=null;checked=null;}
+   render();return;}
+  if(t.dataset.act==="reset"){reset();render();return;}
+  if(t.dataset.act==="solve"){placed.L=S.L.slice();placed.R=S.R.slice();o2v=S.o2;env=S.en||"";sel=null;checked={all:true,msg:"So sieht die Lösung aus."};render();return;}
+  if(t.dataset.act==="check"){
+   o2v=$("#selO2",host).value;var se=$("#selEn",host);env=se?se.value:"";
+   var tot=S.L.length+S.R.length+1+(S.en?1:0),ok=0;
+   placed.L.forEach(function(v){if(S.L.indexOf(v)>-1)ok++;});placed.R.forEach(function(v){if(S.R.indexOf(v)>-1)ok++;});
+   if(o2v===S.o2)ok++;if(S.en&&env===S.en)ok++;
+   checked={all:ok===tot,msg:ok===tot?"Alles richtig.":ok+" von "+tot+" Angaben stimmen. Rot markierte Felder noch einmal prüfen."};render();
+  }
+ });
+ reset();render();
+}
+schemeBuilder($("#schemeHost"));
+
+/* ---------- Training 2: Situationen ---------- */
+var WAYS=["Zellatmung","Milchsäuregärung","alkoholische Gärung","Essigsäurebildung"];
+var SITS=[
+ {q:"Hefen sitzen in Traubensaft in einem luftdicht verschlossenen Gärbehälter. Das Gas entweicht über ein Gärröhrchen.",a:"alkoholische Gärung",e:"Ohne Sauerstoff stellen Hefen auf alkoholische Gärung um."},
+ {q:"Milchsäurebakterien im Joghurtbecher. Der Deckel ist geöffnet und Luft kommt dran.",a:"Milchsäuregärung",e:"Milchsäurebakterien vertragen Sauerstoff, betreiben aber ausschließlich Gärung."},
+ {q:"Hefen schwimmen in einem offenen, gut belüfteten Gefäß mit viel Zucker.",a:"Zellatmung",e:"Mit Sauerstoff bevorzugen Hefen aus energetischen Gründen die Zellatmung."},
+ {q:"Ein geöffneter Wein steht tagelang offen. Er schmeckt allmählich nach Essig.",a:"Essigsäurebildung",e:"Essigsäurebakterien wandeln mit Sauerstoff den Alkohol zu Essigsäure um."},
+ {q:"Gehobelter Weißkohl liegt gesalzen unter Lake. Die Milchsäurebakterien vom Kohlblatt arbeiten.",a:"Milchsäuregärung",e:"Das Ergebnis ist Milchsäure. Sie macht das Sauerkraut sauer und haltbar."},
+ {q:"Ein Organismus gewinnt aus einem Glucose-Molekül besonders viel Energie.",a:"Zellatmung",e:"Gärungen liefern wesentlich weniger Energie als die Zellatmung."}
+];
+(function(){
+ var done=0,ok=0,host=$("#sitHost"),tally=$("#sitTally");
+ SITS.forEach(function(s){host.appendChild(qCard({q:s.q,a:s.a,w:WAYS.filter(function(w){return w!==s.a;}),e:s.e},function(c){done++;if(c)ok++;tally.textContent=done+" von "+SITS.length+" beantwortet, "+ok+" richtig."+(done===SITS.length?" Geschafft.":"");}));});
+})();
+
+/* ---------- Training 3: Tabelle ---------- */
+var ORGS=["Milchsäurebakterien","Hefen","Milchsäurebakterien und Hefen","Essigsäurebakterien"];
+var SUBS=["Milchzucker (Laktose)","Malzzucker","Traubenzucker","Zucker aus dem Kohl","Zucker aus dem Mehl"];
+var PRODS=["Milchsäure","Alkohol und Kohlenstoffdioxid","Milchsäure, Alkohol und Kohlenstoffdioxid","Essigsäure"];
+var FILL=[["Käse","Milchsäurebakterien","Milchzucker (Laktose)","Milchsäure"],["Joghurt","Milchsäurebakterien","Milchzucker (Laktose)","Milchsäure"],["Sauerkraut","Milchsäurebakterien","Zucker aus dem Kohl","Milchsäure"],["Bier","Hefen","Malzzucker","Alkohol und Kohlenstoffdioxid"],["Wein","Hefen","Traubenzucker","Alkohol und Kohlenstoffdioxid"],["Sauerteig","Milchsäurebakterien und Hefen","Zucker aus dem Mehl","Milchsäure, Alkohol und Kohlenstoffdioxid"]];
+(function(){
+ var tb=$("#fillTable");
+ function sel(id,list){return '<select id="'+id+'"><option value="">wählen</option>'+list.map(function(x){return "<option>"+x+"</option>";}).join("")+"</select>";}
+ tb.innerHTML='<thead><tr><th>Produkt</th><th>Organismus</th><th>Substrat</th><th>Entsteht</th></tr></thead><tbody>'+FILL.map(function(r,i){return "<tr><td><b>"+r[0]+"</b></td><td>"+sel("f"+i+"a",ORGS)+"</td><td>"+sel("f"+i+"b",SUBS)+"</td><td>"+sel("f"+i+"c",PRODS)+"</td></tr>";}).join("")+"</tbody>";
+ function each(fn){FILL.forEach(function(r,i){["a","b","c"].forEach(function(k,j){fn($("#f"+i+k),r[j+1]);});});}
+ $("#fillCheck").addEventListener("click",function(){var ok=0,tot=FILL.length*3;each(function(s,ans){var g=s.value===ans;s.className=g?"ok":"bad";if(g)ok++;});
+  var m=$("#fillMsg");m.textContent=ok===tot?"Alles richtig.":ok+" von "+tot+" Feldern stimmen. Rote noch einmal prüfen.";m.className="msg "+(ok===tot?"ok":"bad");});
+ $("#fillSolve").addEventListener("click",function(){each(function(s,ans){s.value=ans;s.className="ok";});$("#fillMsg").textContent="So sieht die Lösung aus.";$("#fillMsg").className="msg";});
+ $("#fillReset").addEventListener("click",function(){each(function(s){s.value="";s.className="";});$("#fillMsg").textContent="";});
+})();
+
+/* ---------- Training 4: Reihenfolge ---------- */
+function orderTask(host,steps){
+ var arr,checked=false;
+ function shuffle(){var a;do{a=sh(steps.map(function(t,i){return {t:t,i:i};}));}while(a.every(function(x,i){return x.i===i;}));return a;}
+ arr=shuffle();
+ function render(){
+  host.innerHTML='<ol class="order">'+arr.map(function(x,p){var c=checked?(x.i===p?" ok":" bad"):"";
+   return '<li class="'+c.trim()+'"><span class="t">'+x.t+'</span><span class="mv"><button type="button" class="btn small" data-mv="'+p+':-1" aria-label="nach oben"'+(p===0?" disabled":"")+'>▲</button><button type="button" class="btn small" data-mv="'+p+':1" aria-label="nach unten"'+(p===arr.length-1?" disabled":"")+'>▼</button></span></li>';}).join("")+
+   '</ol><div class="row-actions"><button class="btn primary" type="button" data-a="check">Prüfen</button><button class="btn" type="button" data-a="solve">Lösung zeigen</button><button class="btn" type="button" data-a="mix">Neu mischen</button><span class="msg" role="status" id="m'+host.id+'"></span></div>';
+  if(checked){var n=arr.filter(function(x,p){return x.i===p;}).length;var m=$("#m"+host.id);m.textContent=n===arr.length?"Richtige Reihenfolge.":n+" von "+arr.length+" Schritten stehen an der richtigen Stelle.";m.className="msg "+(n===arr.length?"ok":"bad");}
+ }
+ host.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
+  if(b.dataset.mv){var pr=b.dataset.mv.split(":"),p=+pr[0],d=+pr[1],q=p+d;var t=arr[p];arr[p]=arr[q];arr[q]=t;checked=false;render();
+   var nb=host.querySelector('[data-mv="'+q+':'+d+'"]');if(nb&&!nb.disabled)nb.focus();return;}
+  if(b.dataset.a==="check"){checked=true;render();}
+  if(b.dataset.a==="solve"){arr=steps.map(function(t,i){return {t:t,i:i};});checked=true;render();}
+  if(b.dataset.a==="mix"){arr=shuffle();checked=false;render();}
+ });
+ render();
+}
+orderTask($("#ordBier"),["Gerste keimen lassen und darren: Es entsteht Malz.","Maischen: Enzyme setzen Stärke zu Malzzucker um.","Läutern zur Würze und Kochen mit Hopfen.","Brauhefe zugeben: Hauptgärung, das CO₂ entweicht.","Nachgärung in geschlossenen Behältern: CO₂ löst sich als Kohlensäure.","Reifung."]);
+orderTask($("#ordKraut"),["Weißkohl hobeln.","Mit Salz (1–5 %) vermengen.","Fest einlegen, die Lake muss den Kohl ganz bedecken.","Milchsäuregärung bei ca. 20 °C (zwei Tage bis zwei Wochen).","Reifen im kühlen Raum (4–6 Wochen)."]);
+
+/* ---------- Training 5: Sortieren ---------- */
+(function(){
+ var CATS=["Feuchtigkeit entziehen","Temperatur ändern","Milieu ändern"];
+ var ITEMS=[["Räuchern",0],["Salzen (Pökeln)",0],["Zuckern",0],["Trocknen von Obst",0],["Erhitzen auf über 100 °C",1],["Schockfrosten",1],["Lagerung im Kühlschrank",1],["Sauerkraut mit Milchsäurebakterien",2],["Silage herstellen",2]];
+ var host=$("#sortHost"),tally=$("#sortTally"),first=0,fin=0;
+ ITEMS=sh(ITEMS);
+ ITEMS.forEach(function(it,idx){
+  var row=h("div","sortrow");var wrong=false,tries=0;
+  row.innerHTML='<span class="t">'+it[0]+'</span><span class="cats"></span>';
+  CATS.forEach(function(c,ci){var b=h("button","btn",c);b.type="button";
+   b.addEventListener("click",function(){
+    if(row.classList.contains("done"))return;tries++;
+    if(ci===it[1]){row.classList.add("done");$$(".cats",row)[0].innerHTML='<span class="msg ok">✓ '+CATS[ci]+'</span>';var hint=$(".hint",row);if(hint)hint.remove();fin++;if(tries===1)first++;
+     tally.textContent=fin+" von "+ITEMS.length+" zugeordnet, davon "+first+" im ersten Versuch."+(fin===ITEMS.length?" Geschafft.":"");}
+    else{var hn=$(".hint",row)||row.appendChild(h("div","hint"));hn.textContent="Das passt nicht. Frage dich: Wird Wasser entzogen, die Temperatur verändert oder das Milieu sauer gemacht?";}
+   });$(".cats",row).appendChild(b);});
+  host.appendChild(row);
+ });
+})();
+
+/* ---------- Training 6: Stimmt's ---------- */
+(function(){
+ var TF=[
+  {q:"Bei der Zellatmung entstehen Kohlenstoffdioxid und Wasser.",a:true,e:"Glucose + Sauerstoff → Kohlenstoffdioxid + Wasser."},
+  {q:"Milchsäurebakterien sterben sofort ab, sobald Sauerstoff an sie gelangt.",a:false,e:"Sie tolerieren Sauerstoff, betreiben aber ausschließlich Gärung."},
+  {q:"Beim Backen verdampft der Alkohol, der bei der Teigführung entstanden ist.",a:true,e:"Bei den hohen Backtemperaturen verdampft Ethanol, das Kohlenstoffdioxid lockert den Teig."},
+  {q:"Bakterien besitzen einen Zellkern, in dem das Ringchromosom liegt.",a:false,e:"Bakterien sind Prokaryoten. Das Ringchromosom liegt frei im Zellplasma."},
+  {q:"Die Zellwand der Pilze besteht aus Chitin.",a:true,e:"Bei Bakterien dagegen gibt die Zellwand nur Form und Stabilität."},
+  {q:"Zucker konserviert Lebensmittel, weil er ihnen Wasser entzieht.",a:true,e:"Zuckern, Salzen und Räuchern entziehen bis zu 80 % des Wassers."},
+  {q:"Salmonellen findet man vor allem in rohen Eiern und rohem Fleisch.",a:true,e:"Sie lösen eine heftige Durchfallerkrankung aus."},
+  {q:"Bei der Joghurtherstellung wird erst die Starterkultur zugegeben und danach die Milch erhitzt.",a:false,e:"Erst auf ca. 90 °C erhitzen (tötet die Bakterien der Milch ab), abkühlen, dann Starterkultur zugeben."},
+  {q:"Hefen vermehren sich auch ohne Sauerstoff weiter.",a:true,e:"Sie stellen auf alkoholische Gärung um. Deshalb heißen sie fakultative Anaerobier."},
+  {q:"Bei Schimmel genügt es, die sichtbare Stelle abzuschneiden. Der Rest ist dann sicher.",a:false,e:"Das Mycel durchzieht das Lebensmittel unsichtbar, die Mykotoxine sind giftig."}
+ ];
+ var host=$("#tfHost"),tally=$("#tfTally"),n=0,ok=0;
+ TF.forEach(function(q){q.tf=true;host.appendChild(qCard(q,function(c){n++;if(c)ok++;tally.textContent=n+" von "+TF.length+" beantwortet, "+ok+" richtig."+(n===TF.length?" Geschafft.":"");}));});
+})();
+
+/* ---------- Training 7: Freitext mit Selbstkontrolle ---------- */
+(function(){
+ var FT=[
+  {q:"Erkläre, warum ein Wein süß schmecken kann, obwohl er mit Hilfe von Hefen vergoren wurde.",
+   crit:["Hefen wandeln Traubenzucker im Most in Alkohol und Kohlenstoffdioxid um (alkoholische Gärung).","Wird die Gärung vom Winzer früh gestoppt, bleibt ein Teil des Zuckers übrig. Der Wein ist süßer und hat weniger Alkohol."],
+   sol:"Hefen vergären den Traubenzucker im Most zu Alkohol und Kohlenstoffdioxid. Stoppt der Winzer die Gärung früh, ist noch nicht der ganze Zucker verbraucht. Der übrige Zucker macht den Wein süß, und weil weniger Zucker vergoren wurde, enthält er auch weniger Alkohol."},
+  {q:"Lena rührt Hefe in kochend heißes Wasser und mischt sie unter den Teig. Der Teig geht nicht auf. Erkläre, was schiefgelaufen ist, und gib einen Tipp.",
+   crit:["Die hohe Temperatur hat die Hefezellen abgetötet.","Ohne lebende Hefe läuft keine alkoholische Gärung ab, es entsteht kein Kohlenstoffdioxid.","Das Kohlenstoffdioxid lockert normalerweise den Teig, ohne es bleibt er fest.","Tipp: lauwarmes Wasser verwenden und neue Hefe nehmen."],
+   sol:"Das kochende Wasser hat die Hefezellen abgetötet. Ohne lebende Hefe findet keine alkoholische Gärung statt, deshalb entsteht kein Kohlenstoffdioxid. Dieses Gas bildet normalerweise Blasen und lockert den Teig, ohne es bleibt der Teig fest. Tipp: neue Hefe in lauwarmem Wasser anrühren."}
+ ];
+ var host=$("#freiHost");
+ FT.forEach(function(f,i){
+  var c=h("div","qcard");
+  c.innerHTML='<p class="qtext">'+f.q+'</p><label for="ft'+i+'" class="tally">Deine Antwort</label><textarea id="ft'+i+'" placeholder="Schreibe in ganzen Sätzen."></textarea><div class="row-actions"><button class="btn primary" type="button">Beispiellösung anzeigen</button></div><div class="sol" hidden></div>';
+  var sol=$(".sol",c);
+  $("button",c).addEventListener("click",function(){
+   sol.hidden=false;
+   sol.innerHTML='<p><b>Beispiellösung</b></p><p>'+f.sol+'</p><p><b>Hake ab, was in deiner Antwort stand:</b></p>'+f.crit.map(function(t,k){return '<label><input type="checkbox" id="ft'+i+'c'+k+'"><span>'+t+'</span></label>';}).join("")+'<p class="msg" role="status" id="ft'+i+'r"></p>';
+   function upd(){var n=$$("input:checked",sol).length;var r=$("#ft"+i+"r");r.textContent=n+" von "+f.crit.length+" Kriterien erfüllt."+(n<f.crit.length?" Ergänze die fehlenden in deinem Heft.":" Sehr gut.");}
+   $$("input",sol).forEach(function(x){x.addEventListener("change",upd);});upd();
+   this.disabled=true;
+  });
+  host.appendChild(c);
+ });
+})();
+
+/* ---------- Testtrainer ---------- */
+var SEC={G:"Grundlagen: Zellen und Vermehrung",S:"Stoffwechsel und Gärungen",B:"Die sechs Beispiele",H:"Verderb und Haltbarmachen"};
+var SECLINK={G:"#grundlagen",S:"#stoffwechsel",B:"#beispiele",H:"#haltbar"};
+var POOL=[
+ {s:"G",q:"Welche Aussage über Bakterienzellen stimmt?",a:"Ihre Erbinformation liegt als Ringchromosom frei im Zellplasma.",w:["Ihre Erbinformation liegt in einem echten Zellkern.","Sie besitzen Mitochondrien und eine Vakuole.","Ihre Zellwand besteht aus Chitin."],e:"Bakterien sind Prokaryoten ohne Zellkern."},
+ {s:"G",q:"Was besitzen Bakterienzellen, Pilzzellen aber nicht?",a:"Plasmide und eine Schleimhülle",w:["Mitochondrien","einen Zellkern","eine Zellwand"],e:"Mitochondrien und Zellkern haben nur die Pilze. Eine Zellwand haben beide."},
+ {s:"G",q:"Welcher Teil der Bakterienzelle gibt ihr die äußere Form und Stabilität?",a:"Zellwand",w:["Zellmembran","Zellplasma","Plasmid"],e:"Die Zellmembran liegt darunter und regelt den Stoffaustausch."},
+ {s:"G",q:"Was sind Plasmide?",a:"zusätzliches Erbmaterial, oft mit Informationen zum Abbau von Giftstoffen oder Schutz vor Medikamenten",w:["die Erbinformation im Zellkern","die Füllsubstanz der Zelle","Organellen zur Energiegewinnung"],e:"Das Ringchromosom enthält die Haupt-Erbinformation."},
+ {s:"G",q:"Wie vermehren sich Bakterien?",a:"Durch Zweiteilung in zwei identische Tochterzellen",w:["Durch Befruchtung zweier Zellen","Durch Bildung eines Zellkerns mit anschließender Teilung","Durch Knospung wie bei Hefen"],e:"Knospung kommt bei Pilzen vor."},
+ {s:"G",q:"Welche Reihenfolge der Bakterienteilung ist richtig?",a:"Chromosom verdoppeln, Zelle wächst in die Länge, Einschnürung, zwei Tochterzellen",w:["Einschnürung, Chromosom verdoppeln, Längenwachstum, zwei Tochterzellen","Längenwachstum, zwei Tochterzellen, Chromosom verdoppeln, Einschnürung","Zwei Tochterzellen, Einschnürung, Längenwachstum, Chromosom verdoppeln"],e:"Erst muss das Erbmaterial verdoppelt sein, dann teilt sich die Zelle."},
+ {s:"G",q:"Ein Bakterium teilt sich bei optimalen Bedingungen alle 20 Minuten. Wie viele Bakterien sind nach einer Stunde aus ihm entstanden?",a:"8",w:["3","6","16"],e:"Eine Stunde sind drei Verdopplungen: 2 · 2 · 2 = 8."},
+ {s:"G",q:"In welcher Wachstumsphase ist die Vermehrungsrate am höchsten?",a:"exponentielle Phase",w:["Anlaufphase","stationäre Phase","Absterbephase"],e:"In der Anlaufphase stellen sich die Bakterien erst auf das Nährmedium ein."},
+ {s:"G",q:"Sterberate und Vermehrungsrate sind im Gleichgewicht, die Bakterienzahl stagniert. Um welche Phase handelt es sich?",a:"stationäre Phase",w:["Anlaufphase","exponentielle Phase","Absterbephase"],e:"Die Ressourcen werden knapp."},
+ {s:"S",q:"Was bedeutet aerob?",a:"Der Stoffwechsel läuft mit Sauerstoff ab (Zellatmung).",w:["Der Stoffwechsel läuft ohne Sauerstoff ab (Gärung).","Der Organismus lebt nur bei hohen Temperaturen.","Der Organismus stellt seine Nährstoffe selbst her."],e:"Anaerob ist das Gegenteil."},
+ {s:"S",q:"Welcher Organismus ernährt sich heterotroph?",a:"Eine Hefe, die Zucker aus ihrer Umgebung aufnimmt",w:["Eine Buche, die Fotosynthese betreibt","Ein Moos, das Licht nutzt","Eine Alge, die ihre Nährstoffe selbst aufbaut"],e:"Heterotrophe nehmen energiereiche organische Stoffe auf."},
+ {s:"S",q:"Wie heißen Mikroorganismen, die ohne Sauerstoff überleben können?",a:"Anaerobier",w:["Aerobier","Heterotrophe","Prokaryoten"],e:"Ein Beispiel ist Clostridium botulinum."},
+ {s:"S",q:"Welche Reaktion beschreibt die Milchsäuregärung?",a:"Glucose → Milchsäure",w:["Glucose → Ethanol + Kohlenstoffdioxid","Glucose + Sauerstoff → Kohlenstoffdioxid + Wasser","Ethanol + Sauerstoff → Essigsäure + Wasser"],e:"Die zweite Antwort ist die alkoholische Gärung, die dritte die Zellatmung."},
+ {s:"S",q:"Welche Reaktion beschreibt die alkoholische Gärung?",a:"Glucose → Ethanol + Kohlenstoffdioxid",w:["Glucose → Milchsäure","Glucose + Sauerstoff → Kohlenstoffdioxid + Wasser","Milchsäure → Glucose + Sauerstoff"],e:"Dabei entstehen Alkohol und Kohlenstoffdioxid."},
+ {s:"S",q:"Wie unterscheiden sich Zellatmung und Gärung bei der Energie?",a:"Die Zellatmung liefert wesentlich mehr Energie als eine Gärung.",w:["Die Gärung liefert wesentlich mehr Energie als die Zellatmung.","Beide liefern gleich viel Energie.","Gärung liefert gar keine Energie."],e:"Deshalb bevorzugen Hefen mit Sauerstoff die Zellatmung."},
+ {s:"S",q:"Wie verhält sich die Hefe bei Sauerstoffmangel?",a:"Sie stellt auf alkoholische Gärung um und vermehrt sich weiter.",w:["Sie stirbt sofort ab.","Sie betreibt Fotosynthese.","Sie stellt auf Milchsäuregärung um."],e:"Deshalb heißt die Hefe fakultativer Anaerobier: Sie hat die Wahl."},
+ {s:"S",q:"Was tun Essigsäurebakterien?",a:"Sie wandeln mit Sauerstoff Alkohol zu Essigsäure um.",w:["Sie vergären Milchzucker zu Milchsäure.","Sie bilden ohne Sauerstoff Alkohol und Kohlenstoffdioxid.","Sie bauen Essigsäure zu Glucose auf."],e:"Aus Wein wird so Essig."},
+ {s:"B",q:"Warum wird die Milch für Joghurt zuerst auf ca. 90 °C erhitzt?",a:"Die ursprünglich in der Milch lebenden Bakterien werden abgetötet, damit nur die Starterkultur arbeitet.",w:["Damit die Starterkultur durch die Hitze aktiviert wird.","Damit der Milchzucker verdampft.","Damit sich Alkohol bildet."],e:"Danach kühlt man auf ca. 36 °C, erst dann kommt die Starterkultur dazu."},
+ {s:"B",q:"Wofür wird bei der Käseherstellung Lab verwendet?",a:"Es legt zusammen mit Milchsäurebakterien die Milch dick.",w:["Es tötet die Bakterien der Rohmilch ab.","Es bildet den Alkohol im Käse.","Es sorgt für die Salzlake."],e:"Lab ist ein Enzymgemisch aus dem Labmagen junger Wiederkäuer."},
+ {s:"B",q:"Wie heißt die Flüssigkeit, die beim Käse vom Käsebruch abgetrennt wird?",a:"Molke",w:["Würze","Most","Lake"],e:"Würze gehört zum Bier, Most zum Wein, Lake zum Sauerkraut."},
+ {s:"B",q:"Wozu wird die Würze beim Bierbrauen mit Hopfen gekocht?",a:"Für den bitteren Geschmack und bessere Haltbarkeit",w:["Damit die Hefe abgetötet wird.","Damit Milchsäure entsteht.","Damit die Gerste keimt."],e:"Die Hefe kommt erst danach in die Würze."},
+ {s:"B",q:"Wie heißt der Traubensaft vor der Gärung?",a:"Most",w:["Würze","Molke","Maische"],e:"Die Maische gehört zum Bier."},
+ {s:"B",q:"Was passiert beim Maischen?",a:"Enzyme setzen Stärke zu Malzzucker um.",w:["Hefen vergären Malzzucker zu Alkohol.","Die Gerste wird zum Keimen gebracht.","Der Hopfen wird in die Würze gegeben."],e:"Der Malzzucker ist das Substrat der Hefen."},
+ {s:"B",q:"Welche Mikroorganismen arbeiten im Sauerteig?",a:"Milchsäurebakterien und Hefen gemeinsam",w:["Nur Hefen","Nur Milchsäurebakterien","Essigsäurebakterien und Schimmelpilze"],e:"Die Hefen lockern, die Säuren verbessern Geschmack und Haltbarkeit."},
+ {s:"H",q:"Was brauchen Mikroorganismen zur Vermehrung auf Lebensmitteln?",a:"ausreichend Feuchtigkeit, ein passendes Milieu und passende Temperaturen",w:["Licht, Salz und Kälte","Sauerstoff, Zucker und Hitze über 100 °C","nur Sauerstoff"],e:"Konservierung setzt an diesen Bedingungen an."},
+ {s:"H",q:"Warum konserviert Zuckern ein Lebensmittel?",a:"Es entzieht dem Lebensmittel Wasser.",w:["Es senkt die Temperatur.","Es macht das Lebensmittel sauer.","Es tötet Bakterien durch Hitze ab."],e:"Salzen und Räuchern wirken genauso."},
+ {s:"H",q:"Warum darf man schimmeliges Brot nicht einfach an der sichtbaren Stelle abschneiden und weiteressen?",a:"Das Mycel durchzieht das Brot unsichtbar und die Mykotoxine sind giftig.",w:["Schimmel ist nur ungesund, wenn er schwarz ist.","Der Schimmel bildet Alkohol.","Schimmel sitzt nur an der Oberfläche."],e:"Befallene Nahrung darf nicht mehr gegessen werden."},
+ {s:"H",q:"Was ist bei Clostridium botulinum richtig?",a:"Sein Stoffwechsel ist anaerob, es bildet Botulinum-Toxine und seine Sporen werden erst über 100 °C abgetötet.",w:["Es braucht Sauerstoff und lebt auf rohen Eiern.","Seine Sporen sterben schon bei 60 °C.","Es ist ein Schimmelpilz mit Mycel."],e:"Salmonellen leben in Eiern und rohem Fleisch."},
+ {s:"H",q:"Welche Aussage über das Schockfrosten stimmt?",a:"Bei Temperaturen unter −80 °C bleiben nahezu alle Vitamine erhalten.",w:["Es zerstört die meisten Vitamine.","Es ist dasselbe wie das Einfrieren bei −18 °C zu Hause.","Es entzieht dem Lebensmittel 80 % des Wassers."],e:"Langsames Einfrieren bei −18 °C führt zu mehr Vitaminverlust."},
+ {s:"H",q:"Welche Methode gehört zur Kategorie „Veränderung der Temperatur“?",a:"Schockfrosten",w:["Räuchern","Salzen","Zuckern"],e:"Die anderen drei entziehen Wasser."},
+ {s:"H",q:"Wie wird Konservengemüse haltbar gemacht?",a:"Es wird kurz und stark erhitzt und unter Luftabschluss in Dosen gefüllt.",w:["Es wird mit Milchsäurebakterien vergoren.","Es wird bei 70 °C getrocknet.","Es wird geräuchert."],e:"Dabei werden Vitamine zerstört."}
+];
+(function(){
+ var host=$("#quizHost");
+ function start(){
+  var picks=[];Object.keys(SEC).forEach(function(k){picks=picks.concat(sh(POOL.filter(function(q){return q.s===k;})).slice(0,3));});
+  var qs=sh(picks),i=0,res=[];
+  function show(){
+   host.innerHTML="";
+   var top=h("div","","");top.innerHTML='<p class="tally">Frage '+(i+1)+' von '+qs.length+'</p><div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="'+qs.length+'" aria-valuenow="'+i+'"><i style="width:'+Math.round(i/qs.length*100)+'%"></i></div>';
+   host.appendChild(top);
+   var next=h("button","btn primary",i===qs.length-1?"Auswertung":"Weiter");next.type="button";next.disabled=true;next.style.marginTop=".4rem";
+   host.appendChild(qCard(qs[i],function(c){res.push({q:qs[i],c:c});next.disabled=false;next.focus();}));
+   host.appendChild(next);
+   next.addEventListener("click",function(){i++;if(i<qs.length)show();else finish();});
+  }
+  function finish(){
+   var ok=res.filter(function(r){return r.c;}).length;
+   var by={};Object.keys(SEC).forEach(function(k){by[k]={n:0,ok:0};});
+   res.forEach(function(r){by[r.q.s].n++;if(r.c)by[r.q.s].ok++;});
+   var min=Math.min.apply(null,Object.keys(by).map(function(k){return by[k].ok;}));
+   var weak=Object.keys(by).filter(function(k){return by[k].ok===min&&min<by[k].n;});
+   var html='<div class="card"><h3>Auswertung</h3><p class="big" style="color:var(--accent)">'+ok+' von '+qs.length+' richtig <span class="tally">('+Math.round(ok/qs.length*100)+' %)</span></p><div class="secres">'+
+    Object.keys(SEC).map(function(k){return '<div class="r"><span>'+SEC[k]+'</span><div class="bar"><i style="width:'+Math.round(by[k].ok/by[k].n*100)+'%"></i></div><b>'+by[k].ok+'/'+by[k].n+'</b></div>';}).join("")+'</div>';
+   if(weak.length)html+='<p><b>Hier lohnt sich Wiederholen:</b> '+weak.map(function(k){return '<a href="'+SECLINK[k]+'">'+SEC[k]+'</a>';}).join(", ")+'.</p>';
+   else html+='<p><b>Alle Themenbereiche sitzen.</b> Probiere noch eine Runde, jedes Mal kommen andere Fragen.</p>';
+   var wr=res.filter(function(r){return !r.c;});
+   if(wr.length){html+='<h3 style="margin-top:1rem">Das war falsch</h3>'+wr.map(function(r){return '<div class="wrong"><b>'+r.q.q+'</b><br>Richtig: '+r.q.a+'</div>';}).join("");}
+   html+='<div class="row-actions"><button class="btn primary" type="button" id="again">Neue Runde mit anderen Fragen</button></div></div>';
+   host.innerHTML=html;$("#again").addEventListener("click",function(){start();host.scrollIntoView({block:"start"});});
+  }
+  show();
+ }
+ host.innerHTML='<div class="card"><h3>Bereit?</h3><p>Du bekommst 12 Fragen aus vier Themenbereichen. Am Ende siehst du, wo du noch Lücken hast.</p><button class="btn primary" type="button" id="qStart">Testtrainer starten</button></div>';
+ $("#qStart").addEventListener("click",start);
+})();
+
+/* ---------- Bakterienzelle: Selbsttest ---------- */
+(function(){
+ var box=$("#bauLegend"),btn=$("#bauToggle"),hint=$("#bauHint");
+ btn.addEventListener("click",function(){
+  var on=!box.classList.contains("test");box.classList.toggle("test",on);btn.setAttribute("aria-pressed",on);
+  $$(".nm",box).forEach(function(n){n.classList.remove("shown");});
+  btn.textContent=on?"Namen wieder zeigen":"Namen verdecken (Selbsttest)";
+  hint.textContent=on?"Nenne den Namen zur Nummer, dann tippe ihn an.":"";
+ });
+ box.addEventListener("click",function(e){var n=e.target.closest(".nm");if(n&&box.classList.contains("test"))n.classList.toggle("shown");});
+})();
+
+/* ---------- Glossar ---------- */
+var GL=[
+ ["aerob","Stoffwechsel mit Sauerstoff (Zellatmung)."],
+ ["anaerob","Stoffwechsel ohne Sauerstoff. Die Prozesse heißen Gärungsprozesse."],
+ ["Anaerobier","Mikroorganismen, die ohne Sauerstoff überleben können."],
+ ["Chitin","Baustoff der Zellwand von Pilzen."],
+ ["fakultativer Anaerobier","Organismus mit Wahlmöglichkeit, z. B. die Hefe: mit Sauerstoff Zellatmung, ohne Sauerstoff Gärung."],
+ ["Gärung","Energiegewinnung ohne Sauerstoff. Liefert wesentlich weniger Energie als die Zellatmung."],
+ ["heterotroph","nimmt energiereiche organische Stoffe auf, um körpereigene Stoffe aufzubauen und Energie bereitzustellen."],
+ ["Konservierung","Haltbarmachen von Lebensmitteln. Die Vermehrung von Mikroorganismen wird stark verlangsamt oder sie werden abgetötet."],
+ ["Lab","Enzymgemisch aus dem Labmagen junger Wiederkäuer. Legt zusammen mit Milchsäurebakterien die Milch dick."],
+ ["Maische","Gemisch aus Malz und Wasser. Beim Maischen setzen Enzyme Stärke zu Malzzucker um."],
+ ["Molke","Flüssigkeit, die beim Käse vom Käsebruch abgetrennt wird."],
+ ["Most","Frisch gepresster Traubensaft vor der Gärung."],
+ ["Mycel","Nicht sichtbares Pilzgeflecht, das ein befallenes Lebensmittel durchzieht."],
+ ["Mykotoxine","giftige Stoffwechselprodukte von Schimmelpilzen."],
+ ["Plasmide","zusätzliches Erbmaterial der Bakterien, oft mit Informationen zum Abbau von Giftstoffen oder zum Schutz vor Medikamenten."],
+ ["Prokaryot / Eukaryot","Prokaryoten (Bakterien) haben keinen Zellkern, Eukaryoten (Pilze) einen echten Zellkern."],
+ ["Ringchromosom","ringförmige Erbinformation der Bakterien, liegt frei im Zellplasma."],
+ ["Sporen","widerstandsfähige Dauerformen. Die von Clostridium botulinum werden erst bei über 100 °C abgetötet."],
+ ["Starterkultur","gezielt zugegebene Mikroorganismen, z. B. Milchsäurebakterien beim Joghurt."],
+ ["Substrat","der Stoff, den Mikroorganismen umsetzen, hier meist ein Zucker."],
+ ["Würze","aus der Maische geläuterte Flüssigkeit beim Bier. Wird mit Hopfen gekocht."],
+ ["Zellatmung","Stoffwechsel mit Sauerstoff: Glucose + Sauerstoff → Kohlenstoffdioxid + Wasser. Liefert viel Energie."]
+];
+var glHtml=GL.map(function(g){return "<dt>"+g[0]+"</dt><dd>"+g[1]+"</dd>";}).join("");
+$("#glossMain").innerHTML=glHtml;$("#glossDlgList").innerHTML=glHtml;
+var dlg=$("#glossDlg");
+$("#openGloss").addEventListener("click",function(){if(typeof dlg.showModal==="function")dlg.showModal();else location.hash="#merkzettel";});
+$("#closeGloss").addEventListener("click",function(){dlg.close();});
+dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close();});
+
+/* ---------- Navigation: aktiver Abschnitt ---------- */
+(function(){
+ var links=$$(".nav a"),secs=links.map(function(a){return $(a.getAttribute("href"));});
+ if(!("IntersectionObserver" in window))return;
+ var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+en.target.id);});}});},{rootMargin:"-30% 0px -60% 0px"});
+ secs.forEach(function(s){if(s)io.observe(s);});
+})();
+})();
+
+</script>
+</body>
+</html>
